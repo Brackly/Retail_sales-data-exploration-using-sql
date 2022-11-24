@@ -1,6 +1,6 @@
 # Retail_sales-data-exploration-using-sql
 
-Using a sample Retail sales data I explored The following with SQL:
+**Using a sample Retail sales data I explored The following with SQL:**
   1.  Previewing the tables
   2.  Finding the years that the sales data spans
   3.  Finding the total number of orders
