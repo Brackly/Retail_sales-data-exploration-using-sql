@@ -1,7 +1,7 @@
 --- Preview the tables
-select  * from SalesLT.SalesOrderDetail
-select * from SalesLT.SalesOrderHeader
-select * from SalesLT.Product
+select  TOP 100 * from SalesLT.SalesOrderDetail
+select TOP 100 *  from SalesLT.SalesOrderHeader
+select TOP 100 * from SalesLT.Product
 select TOP 100 * from SalesLT.ProductModel
 select TOP 100 * from SalesLT.ProductModelProductDescription
 select TOP 100 * from SalesLT.Product
