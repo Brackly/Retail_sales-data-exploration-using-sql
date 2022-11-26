@@ -12,3 +12,6 @@
   9.  Total revenue collected per product
   10. Total revenue collected
   11. Total profit/loss made
+  12. Number of customers as per State and Country
+  13. Customers alongside their spend(our most valued customers)
+  14. Customers alongside their purchase(customers who bought more products)
