@@ -20,12 +20,11 @@ group by p.Name
 order by count(1) desc
 
 -- Find the products customers didnt order
-select p.Name as items_not_ordered from SalesLT.SalesOrderDetail s
+select p.Name as items_not_order from SalesLT.SalesOrderDetail s
 right join SalesLT.Product p
 on s.ProductID=p.ProductID
 where s.SalesOrderID is null
-group by p.Name 
-order by count(1) desc
+
 
 --- Product revenues as a percentage of the total revenue
 
@@ -98,7 +97,39 @@ BEGIN
     PRINT 'BREAK EVEN POINT:'
 END
 
+-- CUSTOMERS 
 
+select top 100 * from SalesLT.Customer
+select top 100 * from SalesLT.CustomerAddress
+select top 100 * from SalesLT.Address
 
+-- Number of customers as per State and Country
+select coalesce(a.StateProvince,'') as StateProvince,
+coalesce(a.CountryRegion,'') as CountryRegion,
+count(ca.CustomerID) as Number_of_Customers 
+from SalesLT.CustomerAddress ca
+join SalesLT.Address a on ca.AddressID=a.AddressID
+group by  rollup(a.CountryRegion,a.StateProvince)
 
+-- Customers alongside their spend(our most valued customers)
 
+select c.FirstName,c.LastName,
+sum(oh.SubTotal) Total
+from SalesLT.SalesOrderHeader oh
+join SalesLT.Customer c
+on oh.CustomerID=c.CustomerID
+group by c.FirstName,c.LastName
+order by sum(oh.SubTotal) desc
+
+-- Customers alongside their purchase(our frequent customers)
+
+select c.FirstName,c.LastName,count(od.ProductId) Number_of_products_bought
+ from SalesLT.SalesOrderDetail od
+join SalesLT.Product p
+on od.ProductId=p.ProductId
+join SalesLT.SalesOrderHeader oh
+on od.SalesOrderID=oh.SalesOrderID
+join SalesLT.Customer c
+on oh.CustomerID=c.CustomerID
+group by c.FirstName,c.LastName
+order by count(od.ProductId) desc
